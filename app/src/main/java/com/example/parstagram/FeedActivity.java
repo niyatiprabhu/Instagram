@@ -22,6 +22,8 @@ public class FeedActivity extends AppCompatActivity {
     protected PostsAdapter adapter;
     protected List<Post> allPosts;
 
+    private EndlessRecyclerViewScrollListener scrollListener;
+
     private SwipeRefreshLayout swipeContainer;
 
     private RecyclerView rvPosts;
@@ -57,7 +59,19 @@ public class FeedActivity extends AppCompatActivity {
         // set the adapter on the recycler view
         rvPosts.setAdapter(adapter);
         // set the layout manager on the recycler view
-        rvPosts.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        rvPosts.setLayoutManager(llm);
+
+        scrollListener = new EndlessRecyclerViewScrollListener(llm) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                // Triggered only when new data needs to be appended to the list
+                // Add whatever code is needed to append new items to the bottom of the list
+                queryPosts();
+            }
+        };
+        rvPosts.addOnScrollListener(scrollListener);
+
         // query posts from Parstagram
         queryPosts();
 
