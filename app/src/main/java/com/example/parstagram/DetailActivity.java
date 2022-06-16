@@ -1,35 +1,101 @@
 package com.example.parstagram;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.parse.FindCallback;
+import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
+
+
+    private Post post;
+    private RecyclerView rvComments;
+    private CommentsAdapter adapter;
+    private List<Comment> allComments;
 
     private TextView tvUsernameDetail;
     private TextView tvTimestampDetail;
     private ImageView ivPostImageDetail;
     private TextView tvDescriptionDetail;
+    private ImageButton ibLikeDetail;
+    private ImageButton ibCommentDetail;
+    private TextView tvNumLikesDetail;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+        rvComments = findViewById(R.id.rvComments);
         tvUsernameDetail = findViewById(R.id.tvUsernameDetail);
         tvTimestampDetail = findViewById(R.id.tvTimestampDetail);
         ivPostImageDetail = findViewById(R.id.ivPostImageDetail);
         tvDescriptionDetail = findViewById(R.id.tvDescriptionDetail);
+        ibLikeDetail = findViewById(R.id.ibLikeDetail);
+        ibCommentDetail = findViewById(R.id.ibCommentDetail);
+        tvNumLikesDetail = findViewById(R.id.tvNumLikesDetail);
 
-        Post post = getIntent().getParcelableExtra("post");
+
+        post = getIntent().getParcelableExtra("post");
+
+        ibCommentDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // go to the compose comment activity
+                Intent i = new Intent(DetailActivity.this, ComposeComment.class);
+                i.putExtra("post", post);
+                startActivity(i);
+            }
+        });
+
+        ibLikeDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<ParseUser> likedBy = post.getLikedBy();
+                if(post.isLikedByCurrentUser()) {
+                    // need to unlike
+                    post.unlike();
+                    //likedBy.remove(ParseUser.getCurrentUser());
+                    ibLikeDetail.setBackgroundResource(R.drawable.ufi_heart);
+                } else {
+                    // else need to like
+                    //likedBy.add(ParseUser.getCurrentUser());
+                    post.like();
+                    ibLikeDetail.setBackgroundResource(R.drawable.ufi_heart_active);
+                }
+//                post.setLikedBy(likedBy);
+//                post.saveInBackground();
+                tvNumLikesDetail.setText(post.getLikesCount());
+
+            }
+        });
+
+        if (post.isLikedByCurrentUser()) {
+            ibLikeDetail.setBackgroundResource(R.drawable.ufi_heart_active);
+        } else {
+            ibLikeDetail.setBackgroundResource(R.drawable.ufi_heart);
+        }
+        tvNumLikesDetail.setText(post.getLikesCount());
+
 
         tvUsernameDetail.setText(post.getUser().getUsername());
         Date dateCreated = post.getCreatedAt();
@@ -39,7 +105,44 @@ public class DetailActivity extends AppCompatActivity {
         if (image != null) {
             Glide.with(this).load(image.getUrl()).into(ivPostImageDetail);
         }
+
+        if (post.isLikedByCurrentUser()) {
+
+        }
+
+        allComments = new ArrayList<>();
+        adapter = new CommentsAdapter(this, allComments);
+        rvComments.setAdapter(adapter);
+        rvComments.setLayoutManager(new LinearLayoutManager(this));
+        queryComments();
     }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        adapter.clear();
+        queryComments();
+    }
+
+    public void queryComments() {
+        // load all the comments from Parse
+        ParseQuery<Comment> query = ParseQuery.getQuery("Comment");
+        query.whereEqualTo(Comment.KEY_POST, post);
+        query.orderByDescending("createdAt");
+        query.include(Comment.KEY_AUTHOR);
+        query.findInBackground(new FindCallback<Comment>() {
+            @Override
+            public void done(List<Comment> objects, ParseException e) {
+                if (e != null) {
+                    Log.e("Failed to get comments", e.getMessage());
+                    return;
+                }
+                adapter.comments.addAll(objects);
+                adapter.notifyDataSetChanged();
+            }
+        });
+    }
+
     public static String calculateTimeAgo(Date createdAt) {
 
         int SECOND_MILLIS = 1000;

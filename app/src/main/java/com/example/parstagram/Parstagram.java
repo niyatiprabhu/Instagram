@@ -14,6 +14,7 @@ public class Parstagram extends Application {
         super.onCreate();
 
         ParseObject.registerSubclass(Post.class);
+        ParseObject.registerSubclass(Comment.class);
 
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId("GMOI5k7N67icb2koSKcZsB9qV8xBqf4H9ylaJkfJ")

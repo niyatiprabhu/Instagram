@@ -50,7 +50,6 @@ public class ComposeFragment extends Fragment {
     private ImageView ivPostImage;
     private Button btnSubmitPhoto;
     private Button btnLogout;
-    private Button btnGoFeed;
 
     public String photoFileName = "photo.jpg";
     private File photoFile;
@@ -78,22 +77,14 @@ public class ComposeFragment extends Fragment {
         btnSubmitPhoto = view.findViewById(R.id.btnSubmitPhoto);
         ivPostImage = view.findViewById(R.id.ivPostImage);
         btnLogout = view.findViewById(R.id.btnLogout);
-        btnGoFeed = view.findViewById(R.id.btnGoFeed);
 
-        btnGoFeed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getContext(), FeedActivity.class);
-                startActivity(i);
-            }
-        });
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ParseUser.logOut();
                 Intent i = new Intent(getContext(), LoginActivity.class);
                 startActivity(i);
-                getContext().finish();
+                ((Activity)getContext()).finish();
             }
         });
 
@@ -142,6 +133,8 @@ public class ComposeFragment extends Fragment {
             }
 
         });
+        // ***** WANT TO GO BACK TO HOME FRAGMENT AFTER SUBMITTING PHOTO
+        // use bundle, look at codepath fragment to fragment guide
     }
 
 
@@ -160,8 +153,6 @@ public class ComposeFragment extends Fragment {
             }
         }
     }
-
-
 
 
     public void onLaunchCamera(View view) {
@@ -200,23 +191,6 @@ public class ComposeFragment extends Fragment {
         File file = new File(mediaStorageDir.getPath() + File.separator + fileName);
 
         return file;
-    }
-
-    private void queryPosts() {
-        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
-        query.include(Post.KEY_USER);
-        query.findInBackground(new FindCallback<Post>() {
-            @Override
-            public void done(List<Post> posts, ParseException e) {
-                if (e != null) {
-                    Log.e(TAG, "Issue with getting posts", e);
-                    return;
-                }
-                for (Post post : posts) {
-                    Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
-                }
-            }
-        });
     }
 
 }
