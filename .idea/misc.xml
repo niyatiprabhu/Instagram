@@ -3,16 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/bg_gradient.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/splash_background.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_compose_comment.xml" value="0.26245880126953125" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.21862348178137653" />
         <entry key="app/src/main/res/layout/activity_feed.xml" value="0.2875" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.20859466552734376" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.15432098765432098" />
         <entry key="app/src/main/res/layout/fragment_compose.xml" value="0.24537037037037038" />
-        <entry key="app/src/main/res/layout/fragment_feed.xml" value="0.28802083333333334" />
+        <entry key="app/src/main/res/layout/fragment_feed.xml" value="0.15434083601286175" />
         <entry key="app/src/main/res/layout/fragment_posts.xml" value="0.26458333333333334" />
-        <entry key="app/src/main/res/layout/item_comment.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.2873702594940675" />
+        <entry key="app/src/main/res/layout/item_comment.xml" value="0.31415557861328125" />
         <entry key="app/src/main/res/layout/item_post.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_user_post.xml" value="0.2722222222222222" />
+        <entry key="app/src/main/res/layout/splash_background.xml" value="0.26666666666666666" />
+        <entry key="app/src/main/res/layout/toolbar_main.xml" value="0.21041666666666667" />
         <entry key="app/src/main/res/menu/menu_bottom_navigation.xml" value="0.3212962962962963" />
       </map>
     </option>

@@ -15,8 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.parstagram.EndlessRecyclerViewScrollListener;
-import com.example.parstagram.Post;
-import com.example.parstagram.PostsAdapter;
+import com.example.parstagram.models.Post;
+import com.example.parstagram.adapters.PostsAdapter;
 import com.example.parstagram.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -45,11 +45,23 @@ public class FeedFragment extends Fragment {
 
 
     @Override
+    // this is a lifecycle method that triggers just once when this fragment
+    // loads on the frame
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_feed, container, false);
     }
+
+    @Override
+    // lifecycle method
+    public void onResume() {
+        super.onResume();
+        // when we come back to feed, query posts here.
+        adapter.clear();
+        queryPosts(0);
+    }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -94,7 +106,7 @@ public class FeedFragment extends Fragment {
         rvPosts.addOnScrollListener(scrollListener);
 
         // query posts from Parstagram
-        queryPosts(0);
+
     }
 
     public void fetchTimelineAsync(int page) {
@@ -103,7 +115,7 @@ public class FeedFragment extends Fragment {
         adapter.clear();
         queryPosts(0);
         // ...the data has come back, add new items to your adapter...
-        adapter.addAll(allPosts);
+        adapter.notifyDataSetChanged();
         // Now we call setRefreshing(false) to signal refresh has finished
         swipeContainer.setRefreshing(false);
 

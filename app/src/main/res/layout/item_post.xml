@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_margin="1dp"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/tvUsername"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="308dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivProfilePic"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="rahul" />
 
@@ -22,9 +23,11 @@
         android:id="@+id/ivImage"
         android:layout_width="match_parent"
         android:layout_height="300dp"
+        android:layout_marginTop="15dp"
         android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvUsername"
-        tools:layout_editor_absoluteX="0dp"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -46,33 +49,70 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
+    <TextView
+        android:id="@+id/tvTimestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNumLikes" />
+
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@+id/tvDescription">
 
         <ImageButton
-            android:id="@+id/ibCommentDetail"
+            android:id="@+id/ibLike"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="5dp"
             android:background="@drawable/ufi_heart"
             app:layout_constraintEnd_toStartOf="@+id/ibLikeDetail"
             app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
 
         <ImageButton
-            android:id="@+id/ibLikeDetail"
+            android:id="@+id/ibComment"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="5dp"
             android:background="@drawable/ufi_comment"
             android:scaleType="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
 
+        <ImageButton
+            android:id="@+id/ibSend"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/direct"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
     </LinearLayout>
 
+    <ImageButton
+        android:id="@+id/ibBookmark"
+        android:layout_width="25dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/ufi_save"
+        android:backgroundTint="#070707"
+        app:layout_constraintBottom_toTopOf="@+id/tvNumLikes"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivProfilePic"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="15dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@drawable/default_profile_pic" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

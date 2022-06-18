@@ -1,4 +1,4 @@
-package com.example.parstagram;
+package com.example.parstagram.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,12 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.parse.ParseClassName;
+import com.example.parstagram.R;
+import com.example.parstagram.models.Comment;
+import com.example.parstagram.models.Post;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
-public class ComposeComment extends AppCompatActivity {
+public class ComposeCommentActivity extends AppCompatActivity {
 
     Post post;
     Button btnSave;

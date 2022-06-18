@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_height="match_parent"
     android:layout_marginBottom="35dp"
     android:orientation="vertical">
 
@@ -13,47 +12,42 @@
         android:id="@+id/tvUsernameDetail"
         android:layout_width="332dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="25dp"
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="rahul" />
 
-    <TextView
-        android:id="@+id/tvTimestampDetail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvUsernameDetail" />
-
     <ImageView
         android:id="@+id/ivPostImageDetail"
         android:layout_width="match_parent"
         android:layout_height="300dp"
+        android:layout_marginTop="8dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTimestampDetail"
+        app:layout_constraintTop_toBottomOf="@+id/tvUsernameDetail"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/tvDescriptionDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivPostImageDetail"
-        tools:layout_editor_absoluteX="0dp"
         tools:text="trying to look hipster" />
 
     <TextView
         android:id="@+id/tvNumLikesDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
         android:layout_weight="1"
         android:text="0"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,27 +56,29 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvComments"
         android:layout_width="398dp"
-        android:layout_height="130dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvNumLikesDetail" />
+        app:layout_constraintTop_toBottomOf="@+id/tvNumLikesDetail"></androidx.recyclerview.widget.RecyclerView>
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="30dp"
+        android:layout_marginLeft="4dp"
         android:layout_marginTop="10dp"
         android:textAlignment="textEnd"
         app:flow_horizontalAlign="end"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDescriptionDetail">
 
         <ImageButton
             android:id="@+id/ibLikeDetail"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="5dp"
             android:background="@drawable/ufi_heart"
             app:layout_constraintEnd_toStartOf="@+id/ibComment"
             app:layout_constraintTop_toBottomOf="@+id/tvDescriptionDetail" />
@@ -96,5 +92,48 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvDescriptionDetail" />
 
+        <ImageButton
+            android:id="@+id/ibSendDetail"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/direct"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDescriptionDetail" />
+
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/ibBookmarkDetail"
+        android:layout_width="25dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/ufi_save"
+        android:backgroundTint="#070707"
+        app:layout_constraintBottom_toTopOf="@+id/tvNumLikesDetail"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTimestampDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="5dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvComments" />
+
+    <ImageView
+        android:id="@+id/ivProfilePicDetail"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@+id/tvUsernameDetail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/default_profile_pic" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

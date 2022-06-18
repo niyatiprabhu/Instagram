@@ -6,20 +6,21 @@
     android:layout_height="match_parent"
     android:background="@color/pink_red"
     android:outlineAmbientShadowColor="#171414"
-    tools:context=".LoginActivity">
+    tools:context=".activities.LoginActivity">
 
     <EditText
         android:id="@+id/etUsername"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="364dp"
+        android:layout_height="50dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="228dp"
         android:layout_marginEnd="25dp"
+        android:background="#4DFFFFFF"
         android:ems="10"
         android:hint="Username"
         android:inputType="textPersonName"
-        android:textColor="#FFDFCACA"
-        android:textColorHint="#FFDFCACA"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,33 +44,32 @@
 
     <EditText
         android:id="@+id/etPassword"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="364dp"
+        android:layout_height="52dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginTop="10dp"
+        android:background="#4DFBFAFA"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         android:textColor="#FDFCFC"
-        android:textColorHint="#FFDFCACA"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/etUsername"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etUsername" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="385dp"
-        android:layout_height="174dp"
-        android:layout_marginBottom="-10dp"
-        android:background="#FBFAFA"
-        android:backgroundTint="#00854D85"
+        android:layout_width="280dp"
+        android:layout_height="117dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/nav_logo_whiteout"
+        android:backgroundTint="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/etUsername"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.038"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/instagram_logo_white" />
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnSignup"

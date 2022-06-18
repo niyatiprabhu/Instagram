@@ -1,4 +1,4 @@
-package com.example.parstagram;
+package com.example.parstagram.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,7 +13,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.example.parstagram.R;
+import com.example.parstagram.adapters.CommentsAdapter;
+import com.example.parstagram.models.Comment;
+import com.example.parstagram.models.Post;
 import com.parse.FindCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseQuery;
@@ -38,6 +44,7 @@ public class DetailActivity extends AppCompatActivity {
     private ImageButton ibLikeDetail;
     private ImageButton ibCommentDetail;
     private TextView tvNumLikesDetail;
+    private ImageView ivProfilePicDetail;
 
 
     @Override
@@ -53,6 +60,7 @@ public class DetailActivity extends AppCompatActivity {
         ibLikeDetail = findViewById(R.id.ibLikeDetail);
         ibCommentDetail = findViewById(R.id.ibCommentDetail);
         tvNumLikesDetail = findViewById(R.id.tvNumLikesDetail);
+        ivProfilePicDetail = findViewById(R.id.ivProfilePicDetail);
 
 
         post = getIntent().getParcelableExtra("post");
@@ -61,7 +69,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // go to the compose comment activity
-                Intent i = new Intent(DetailActivity.this, ComposeComment.class);
+                Intent i = new Intent(DetailActivity.this, ComposeCommentActivity.class);
                 i.putExtra("post", post);
                 startActivity(i);
             }
@@ -74,16 +82,12 @@ public class DetailActivity extends AppCompatActivity {
                 if(post.isLikedByCurrentUser()) {
                     // need to unlike
                     post.unlike();
-                    //likedBy.remove(ParseUser.getCurrentUser());
                     ibLikeDetail.setBackgroundResource(R.drawable.ufi_heart);
                 } else {
                     // else need to like
-                    //likedBy.add(ParseUser.getCurrentUser());
                     post.like();
                     ibLikeDetail.setBackgroundResource(R.drawable.ufi_heart_active);
                 }
-//                post.setLikedBy(likedBy);
-//                post.saveInBackground();
                 tvNumLikesDetail.setText(post.getLikesCount());
 
             }
@@ -105,8 +109,9 @@ public class DetailActivity extends AppCompatActivity {
         if (image != null) {
             Glide.with(this).load(image.getUrl()).into(ivPostImageDetail);
         }
-
-        if (post.isLikedByCurrentUser()) {
+        ParseFile profilePic = post.getUser().getProfilePic();
+        if (image != null) {
+            Glide.with(this).load(profilePic.getUrl()).circleCrop().into(ivProfilePicDetail);
 
         }
 

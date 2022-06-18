@@ -1,5 +1,8 @@
-package com.example.parstagram;
+package com.example.parstagram.activities;
 
+import com.example.parstagram.models.Comment;
+import com.example.parstagram.models.Post;
+import com.example.parstagram.models.User;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
@@ -13,6 +16,7 @@ public class Parstagram extends Application {
     public void onCreate() {
         super.onCreate();
 
+        ParseObject.registerSubclass(User.class);
         ParseObject.registerSubclass(Post.class);
         ParseObject.registerSubclass(Comment.class);
 
